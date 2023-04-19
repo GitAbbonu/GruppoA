@@ -10,23 +10,33 @@ function App() {
 
   //GET ONE
   async function getOnePlanet(id) {
-    const res = await getOne(id);
+    try {
+      const res = await getOne(id);
 
-    console.log(res);
-    setPlanet(res);
+      console.log(res);
+      setPlanet(res);
+    } catch (error) {
+      console.log("Error: " + error);
+    }
   }
 
   //CREATE
   async function createHandler() {
-    await create({ name: "Pippo" });
+    try {
+      await create({ name: "Pippo" });
+    } catch (error) {
+      console.log("Error: " + error);
+    }
   }
 
   //UPDATE
   async function updateHandler(id) {
-    await update(id, { name: "updato" });
+    try {
+      await update(id, { name: "updato" });
+    } catch (error) {
+      console.log("Error: " + error);
+    }
   }
-
-  //DELETE
 
   return (
     <div>
@@ -38,6 +48,7 @@ function App() {
             <button onClick={() => getOnePlanet(p.id)}>Visualizza</button>
             <button onClick={() => updateHandler(p.id)}>Update: updato</button>
             <button onClick={() => deletePlanet(p.id)}>Eliminato</button>
+            {/* //DELETE (UP)*/}
           </div>
         );
       })}

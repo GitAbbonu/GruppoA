@@ -23,39 +23,55 @@ function useSWRF() {
 
   //GetOne
   async function getOne(id) {
-    const res = await fetch(PLANETS_URL + "/" + id);
-    const json = await res.json();
-    console.log(json);
-    return json;
+    try {
+      const res = await fetch(PLANETS_URL + "/" + id);
+      const json = await res.json();
+      console.log(json);
+      return json;
+    } catch (error) {
+      console.log("Error: " + error);
+    }
   }
 
   //Create
   async function create(data) {
-    const option = common_request(data, "POST");
+    try {
+      const option = common_request(data, "POST");
 
-    const res = await fetch(PLANETS_URL, option);
-    const json = await res.json();
-    mutate(PLANETS_URL);
-    return json;
+      const res = await fetch(PLANETS_URL, option);
+      const json = await res.json();
+      mutate(PLANETS_URL);
+      return json;
+    } catch (error) {
+      console.log("Error: " + error);
+    }
   }
 
   //Update
   async function update(id, data) {
-    const option = common_request(data, "PUT");
+    try {
+      const option = common_request(data, "PUT");
 
-    const res = await fetch(PLANETS_URL + "/" + id, option);
-    const json = await res.json();
-    mutate(PLANETS_URL);
-    return json;
+      const res = await fetch(PLANETS_URL + "/" + id, option);
+      const json = await res.json();
+      mutate(PLANETS_URL);
+      return json;
+    } catch (error) {
+      console.log("Error: " + error);
+    }
   }
 
   //Delete
   async function deletePlanet(id) {
-    const option = common_request(null, "DELETE");
+    try {
+      const option = common_request(null, "DELETE");
 
-    await fetch(PLANETS_URL + "/" + id, option);
+      await fetch(PLANETS_URL + "/" + id, option);
 
-    mutate(PLANETS_URL);
+      mutate(PLANETS_URL);
+    } catch (error) {
+      console.log("Error: " + error);
+    }
   }
 
   return { data, error, getOne, create, update, deletePlanet };
